@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} - Lovely Dog Breeds</title>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <header class="navbar bg-base-200 shadow-lg">
+      <div class="flex-1">
+        <a href="/" class="btn btn-ghost text-xl">🐕 Lovely Dog Breeds</a>
+      </div>
+    </header>
+
+    <main class="flex-1 container mx-auto px-4 py-8">
+      <slot />
+    </main>
+
+    <footer class="footer footer-center p-10 bg-base-200 text-base-content">
+      <aside>
+        <p class="font-semibold">Powered by Content Island</p>
+        <p>
+          Visit{' '}
+          <a
+            href="https://content-island.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="link link-primary"
+          >
+            Content Island
+          </a>
+          {' '}to manage your content
+        </p>
+      </aside>
+    </footer>
+  </body>
+</html>
