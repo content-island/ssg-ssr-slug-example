@@ -1,7 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getBreedCollection } from '../api/breed.api';
+
+const breeds = await getBreedCollection();
 ---
 
 <Layout title="Home">
-  <h1 class="text-4xl font-bold text-center">Welcome to Lovely Dog Breeds</h1>
+  <div class="space-y-8">
+    <h1 class="text-4xl font-bold text-center">Welcome to Lovely Dog Breeds</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {breeds.map((breed) => (
+        <div class="flex items-center gap-4 p-3 bg-base-100 rounded-lg shadow hover:shadow-lg transition-shadow">
+          <img 
+            src={breed.photo.url} 
+            alt={breed.name}
+            class="w-20 h-20 object-cover rounded-lg"
+          />
+          <a href={`/breed/${breed.slug}`} class="text-lg font-semibold link link-hover link-primary">
+            {breed.name}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
 </Layout>
