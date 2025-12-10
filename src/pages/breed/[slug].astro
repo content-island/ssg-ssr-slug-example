@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getBreedCollection } from '../../api/breed.api';
+import type { Breed } from '../../model/breed.model';
+
+export async function getStaticPaths() {
+  const breeds = await getBreedCollection();
+  
+  return breeds.map((breed) => ({
+    params: { slug: breed.slug },
+    props: { breed },
+  }));
+}
+
+interface Props {
+  breed: Breed;
+}
+
+const { breed } = Astro.props;
+---
+
+<Layout title={breed.name}>
+  <div class="max-w-4xl mx-auto">
+    <a href="/" class="btn btn-ghost mb-6">← Back to all breeds</a>
+    
+    <div class="card bg-base-100 shadow-xl">
+      <figure>
+        <img 
+          src={breed.photo.url} 
+          alt={breed.name}
+          class="w-full h-110 object-contain bg-base-200"
+        />
+      </figure>
+      <div class="card-body">
+        <h1 class="card-title text-4xl mb-4">{breed.name}</h1>
+        <div class="prose max-w-none">
+          <p class="text-lg">{breed.description}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

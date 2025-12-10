@@ -15,7 +15,7 @@ const breeds = await getBreedCollection();
           <img 
             src={breed.photo.url} 
             alt={breed.name}
-            class="w-20 h-20 object-cover rounded-lg"
+            class="w-30 h-40 object-cover rounded-lg"
           />
           <a href={`/breed/${breed.slug}`} class="text-lg font-semibold link link-hover link-primary">
             {breed.name}
